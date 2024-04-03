@@ -29,7 +29,7 @@ Exercise 3
 
 Solve Exercise 3 here:
 */
-let game = {
+ let game = {
     title: "Day z",
     genre: "Horror",
     platform: "Ps5",
@@ -47,24 +47,37 @@ Exercise 4
 
 Solve Exercise 4 here:
 */
+// Assuming you have an array of Pokémon objects like this:
 
-let pokemon = [
-    { name: "Pikachu", type: "Electric", starter: true },  
+const pokemon = [
+    { name: 'Pikachu', type: 'Electric', starter: true },
+   
     
 ];
 
-function Pikachu(pokemonArray) {
-    return pokemonArray.find(pokemon => pokemon.starter === true);
+
+function selectStarterPokemon(pokemonArray) {
+    
+    for (let i = 0; i < pokemonArray.length; i++) {
+        
+        if (pokemonArray[i].starter === true) {
+            
+            return pokemonArray[i];
+        }
+    }
+    
+    return null;
 }
 
 
-let starterPokemon = Pikachu(pokemon);
+const starterPokemon = selectStarterPokemon(pokemon)
+if (starterPokemon !== null) {
+    console.log("Your starter Pokémon is:", starterPokemon.name);
+} else {
+    console.log("No starter Pokémon found in the array.");
+}
 
-console.log("Starter Pokémon:", Pikachu);
 
-
-
-    
 
   
 
@@ -77,23 +90,36 @@ Exercise 5
 
 Solve Exercise 5 here:
 */
-const game = {
-    party: [],
- pokemon: [
-    { name: "Bulbasaur", type: "Grass", HP: 45, starter: true },
-    { name: "Charmander", type: "Fire", HP: 39, starter: true },
-    { name: "Squirtle", type: "Water", HP: 44, starter: true },
-    
-    
- ],
-attributes: [
-(name, 'type', 'Grass', 45),
-(name, 'type', 'Fire', 39),
-(name, 'type', 'Water', 44),
 
-],
+const Pokemon = [
+    { name: 'Bulbasaur', type: 'Grass', HP: 45 },
+    { name: 'Charmander', type: 'Fire', HP: 39 },
+    { name: 'Squirtle', type: 'Water', HP: 44 },
+];
 
-};
+
+const party = [];
+
+function addToParty(pokemonArray, criteria, value, partyArray, count) {
+    
+    const filteredPokemon = pokemonArray.filter(pokemon => pokemon[criteria] === value);
+    
+    filteredPokemon.sort((a, b) => a.HP - b.HP);
+    
+    for (let i = 0; i < count && i < filteredPokemon.length; i++) {
+        partyArray.push(filteredPokemon[i]);
+    }
+}
+
+
+addToParty(pokemon, 'type', 'Grass', party, 1); 
+addToParty(pokemon, 'type', 'Fire', party, 1);  
+addToParty(pokemon, 'type', 'Water', party, 1); 
+
+
+console.log("Your party:", 'Bulbasaur', 'Charmander', 'Squirtle');
+party.forEach(pokemon => console.log(pokemon.name));
+
 
 
 
@@ -105,13 +131,22 @@ Exercise 6
 
 Solve Exercise 6 here:
 */
-let game = {
+
+const Game = {
     party: [
-        { name: "Bulbasaur", type: "Grass", HP: 45 },
-        { name: "Squirtle", type: "Water", HP: 44 },
-        { name: "Charmander", type: "Fire", HP: 39 }
+        { name: 'Bulbasaur', HP: 45 },
+        { name: 'Squirtle', HP: 44 },
+        { name: 'charmander', HP: 39 },
+        { name: 'Pikachu', HP: 35 },
+        
     ]
-} 
+
+
+
+};
+
+console.log("Arranged party by HP:");
+console.log(pokemon);  ['Bulbasaur', 'Squirtle', 'charmander', 'Pikachu']
 
 /*
 Exercise 7
@@ -120,21 +155,22 @@ Exercise 7
 
 
 Solve Exercise 7 here:
-*/
-const game = {
-    party: [],
-    gyms: [
-    { name: "Viridian City Gym", difficulty: 8, completed: false },
-    { name: "Pewter City Gym", difficulty: 1, completed: true },
-    { name: "Cerulean City Gym", difficulty: 2, completed: true },
+*/// Assuming you have an array of gym objects like this:
+const gyms = [
+    { name: 'Pewter Gym', difficulty: 1, completed: false },
+    { name: 'Cerulean Gym', difficulty: 2, completed: false },
+    { name: 'Vermilion Gym', difficulty: 3, completed: false },
     
-],
-items: [
-    { name: "potion", quantity: 4 },
-    { name: "pokeball", quantity: 8 },
-    { name: "rare candy", quantity: 99 },
-  ],
+];
+
+for (let i = 0; i < gyms.length; i++) {
+    if (gyms[i].difficulty < 3) {
+        gyms[i].completed = true;
+    }
 }
+
+console.log(gyms);
+
 
 /*
 Exercise 8
@@ -152,9 +188,25 @@ More Hints: The existing starter Pokemon will be *replaced* in your party with t
 Solve Exercise 8 here:
 */
 
+const pok = [
+    { name: 'Pikachu', evolvesTo: 'Raichu' },
+    { name: 'Bulbasaur' },
+    { name: 'Charmander' },
+    { name: 'Squirtle' }
+    
+];
+
+const index = party.findIndex(pokemon => pokemon.name === 'Pikachu');
 
 
+if (index !== -1) {
+    party.splice(index, 1, { name: 'Raichu' });
+    delete party[index].Pikachu;
+}
 
+
+console.log("Updated party: 'Raichu'");
+party.forEach(pokemon => console.log(pokemon.name));
 
 
 
@@ -165,6 +217,16 @@ Exercise 9
 
 Solve Exercise 9 here:
 */
+
+const pokemonObj = [
+    { name: 'Bulbasaur' },
+    { name: 'Charmander' },
+    { name: 'Squirtle' },
+    { name: 'Raichu' },
+];
+
+console.log("Pokémon in your party: 'Raichu', 'Bulbasaur', 'Charmander','Squirtle' ");
+party.forEach(pokemon => console.log(pokemon.name));
 
 
 
@@ -178,8 +240,19 @@ Exercise 10
 
 Solve Exercise 10 here:
 */
+const po = [
+    { name: 'Bulbasaur', starter: true },
+    { name: 'Charmander', starter: true },
+    { name: 'Squirtle', starter: true },
+    { name: 'Pikachu', starter: false },
+];
 
-
+for (let i = 0; i < pokemon.length; i++) {
+    if (pokemon[i].starter === true) {
+        console.log("The starter Pokémon is: 'Bulbasaur'", pokemon[i].name);
+        break; 
+    }
+}
 
 /*
 Exercise 11
@@ -192,6 +265,8 @@ After writing this method, call it and pass in a Pokemon object of your choice f
 
 Solve Exercise 11 here:
 */
+
+
 
 
 
